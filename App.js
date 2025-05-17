@@ -1,3 +1,4 @@
+import 'react-native-url-polyfill/auto';
 import React, { useState, useRef } from 'react';
 import {
     View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator,
@@ -5,8 +6,11 @@ import {
 } from 'react-native';
 import useFetchCrypto from './useFetchCrypto';
 import CoinDetails from './CoinDetails';
+import SignUpScreen from './SignUpScreen';
+import LoginScreen from './LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AuthProvider } from './authContext';
 
 const Stack = createStackNavigator();
 
@@ -80,9 +84,61 @@ const HomeScreen = ({ navigation }) => {
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="CoinDetails" component={CoinDetails} />
+            <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen 
+                    name="Login" 
+                    component={LoginScreen}
+                    options={{
+                        title: 'Login',
+                        headerStyle: {
+                            backgroundColor: '#121212',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
+                />
+                <Stack.Screen 
+                    name="SignUp" 
+                    component={SignUpScreen}
+                    options={{
+                        title: 'Sign Up',
+                        headerStyle: {
+                            backgroundColor: '#121212',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
+                />
+                <Stack.Screen 
+                    name="Home" 
+                    component={HomeScreen}
+                    options={{
+                        headerStyle: {
+                            backgroundColor: '#121212',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
+                />
+                <Stack.Screen 
+                    name="CoinDetails" 
+                    component={CoinDetails}
+                    options={{
+                        headerStyle: {
+                            backgroundColor: '#121212',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
